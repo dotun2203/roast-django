@@ -91,8 +91,12 @@ WSGI_APPLICATION = 'studywithdotman.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':'roast-db',
+        'USER':'roast_db_p0et_user',
+        'PASSWORD':'O5pFHIDqr4QcBUYxs1WoRrk5RePfRsK6',
+        'HOSTNAME':'dpg-crdj8iqj1k6c73duc1n0-a',
+        'PORT': '5432'
     }
 }
 database_url = os.environ.get("DATABASE_URL")
