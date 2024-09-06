@@ -101,7 +101,13 @@ DATABASES = {
 }
 database_url = os.environ.get("DATABASE_URL")
 
-DATABASES['default'] = dj_database_url.parse(database_url)
+
+if not database_url:
+    print("DATABASE_URL is not set in the environment")
+
+if database_url:
+    DATABASES['default'] = dj_database_url.parse(database_url)
+
 
 # postgresql://postgres.snkjdsjwlmfnxgdmjvji:[YOUR-PASSWORD]@aws-0-eu-central-1.pooler.supabase.com:6543/postgres
 
