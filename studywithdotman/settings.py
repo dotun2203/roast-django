@@ -17,6 +17,10 @@ from re import DEBUG
 from dotenv import load_dotenv
 load_dotenv()
 import dj_database_url
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -51,9 +55,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    'base.apps.BaseConfig',
     'rest_framework',
     "corsheaders",
+
+    # cloudinary storage
+    'cloudinary',
+    'cloudinary_storage',
+
+
+    'base.apps.BaseConfig',
 ]
 
 AUTH_USER_MODEL = 'base.User'
@@ -181,3 +191,17 @@ MEDIA_ROOT = BASE_DIR / 'static/images'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME':os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY':os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET':os.getenv('CLOUDINARY_API_SECRET')
+}
+
+# setup default file storage
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
+
+MEDIA_URL = '/media/'
