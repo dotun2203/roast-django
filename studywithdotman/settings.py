@@ -170,7 +170,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-MEDIA_URL = '/images/'
+# MEDIA_URL = '/images/'
+
 
 # STATICFILES_DIRS = [
 #     BASE_DIR / 'static'
@@ -179,7 +180,7 @@ MEDIA_URL = '/images/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_ROOT = BASE_DIR / 'static/images'
+# MEDIA_ROOT = BASE_DIR / 'static/images'
 
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, 'static')
@@ -190,7 +191,6 @@ MEDIA_ROOT = BASE_DIR / 'static/images'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGINS = True
 
 
 CLOUDINARY_STORAGE = {
@@ -202,6 +202,8 @@ CLOUDINARY_STORAGE = {
 # setup default file storage
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-
-
 MEDIA_URL = '/media/'
+
+
+CORS_ALLOW_ALL_ORIGINS = True
+
