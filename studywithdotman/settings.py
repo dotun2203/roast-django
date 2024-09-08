@@ -15,11 +15,11 @@ from pathlib import Path
 import os
 from re import DEBUG
 from dotenv import load_dotenv
-load_dotenv()
 import dj_database_url
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+load_dotenv()
 
 
 
@@ -36,7 +36,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(" ")
+# ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(" ")
 
 # if DEBUG:
 #     ALLOWED_HOSTS = ['*']
@@ -164,27 +164,30 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# MEDIA_URL = '/images/'
+# MEDIA_URL = 'static/images/'
 
 
-# STATICFILES_DIRS = [
-#     BASE_DIR / 'static'
-# ]
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+MEDIA_URL = '/media/'
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # MEDIA_ROOT = BASE_DIR / 'static/images'
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static')
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -193,16 +196,29 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME':os.getenv('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY':os.getenv('CLOUDINARY_API_KEY'),
-    'API_SECRET':os.getenv('CLOUDINARY_API_SECRET')
-}
+
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME':os.getenv('CLOUDINARY_CLOUD_NAME'),
+#     'API_KEY':os.getenv('CLOUDINARY_API_KEY'),
+#     'API_SECRET':os.getenv('CLOUDINARY_API_SECRET')
+# }
+
+
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME':'dx2tfgavx',
+#     'API_KEY':'679971742912843',
+#     'API_SECRET':'Kz_TIXSKmztoaSyWFBpgUakFpw8'
+# }
+
+cloudinary.config(
+    cloud_name = 'dx2tfgavx',
+    api_key = '679971742912843',
+    api_secret = 'Kz_TIXSKmztoaSyWFBpgUakFpw8'
+
+)
 
 # setup default file storage
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-MEDIA_URL = '/media/'
 
 
 CORS_ALLOW_ALL_ORIGINS = True
