@@ -29,11 +29,21 @@
           method="POST"
           enctype="multipart/form-data"
         >
-          {% csrf_token %} {% for field in form %}
+          {% csrf_token %} {% if user.avatar %}
           <div class="form__group">
-            <label for="profile_pic">{{field.label}}</label>
-            {{field}}
+            <img src="{{user.avatar.url}}" alt="current avatar" width="150" />
+            <button
+              id="remove-avatar-btn"
+              class="btn btn--danger"
+              type="button"
+            >
+              remove avatar
+            </button>
+            {{form.remove_avatar}}
           </div>
+
+          {% endif %} {% for field in form %}
+          <div class="form__group">{{field}}</div>
           {% endfor %}
 
           <div class="form__action">
@@ -47,4 +57,28 @@
     </div>
   </div>
 </main>
+
+<script>
+  document
+    .getElementById("remove-avatar-btn")
+    .addEventListener("click", function () {
+      fetch("{% url 'remove-avatar' %}", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": "{{ csrf_token }}",
+        },
+        body: JSON.stringify({}),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            alert("Avatar removed successfully");
+            location.reload(); // Reload the page to reflect the change
+          } else {
+            alert("Failed to remove avatar");
+          }
+        });
+    });
+</script>
 {% endblock content %}

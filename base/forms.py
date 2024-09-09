@@ -1,3 +1,4 @@
+from django import forms
 from django.forms import ModelForm
 # from django.contrib.auth.models import User
 from .models import Room, User
@@ -15,6 +16,7 @@ class RoomForm(ModelForm):
         exclude = ['host', 'participants']
 
 class UserForm(ModelForm):
+    remove_avatar = forms.BooleanField(required=False, label="remove current profile picture")
     class Meta:
         model = User
         fields = ['avatar', 'name','username', 'email', 'bio' ] 

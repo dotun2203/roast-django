@@ -13,7 +13,7 @@ class User(AbstractUser):
 
     # avatar = models.ImageField(null=True, default="/static/images/avatar.svg", upload_to='avatars/')
 
-    avatar = CloudinaryField('avatar', null=True)
+    avatar = CloudinaryField('avatar', null=True, default="/static/images/avatar.svg")
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name', 'username']

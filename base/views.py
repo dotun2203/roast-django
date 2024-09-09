@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.db.models import Q
 # from django.contrib.auth.models import User
 from django.contrib import messages
@@ -184,3 +184,11 @@ def topicsPage(request):
 def activityPage(request):
     room_messages = Messsage.objects.all()
     return render(request, 'base/activity.html',{'room_messages':room_messages})
+
+def remove_avatar(request):
+    if request.method == 'POST' and request.user.is_authenticated:
+        user = request.user
+        user.avatar = None
+        user.save()
+        return JsonResponse({'success':True})
+    return JsonResponse({'success':False})
